@@ -19,19 +19,31 @@ class ViewController: UIViewController {
         Story(title: "You see a tiger.", choice1: "Shout for help.", choice2: "Play dead."),
         Story(title: "You find a treasure chest.", choice1: "Open it.", choice2: "Check for traps.")
     ]
+    // track where the user is in the storyline
+    var currentStoryPath = 0
     
     @IBAction func choiceMade(_ sender: UIButton) {
+        let userChoice = sender.currentTitle!
+        // current story based on currentStoryPath value
+        let currentStory = stories[currentStoryPath]
         
+        if userChoice == currentStory.choice1 {
+            currentStoryPath = 1
+        } else if userChoice == currentStory.choice2 {
+            currentStoryPath = 2
+        }
+        updateUI()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        storyLabel.text = stories[2].title
-        choice1Button.setTitle(stories[2].choice1, for: .normal)
-        choice2Button.setTitle(stories[2].choice2, for: .normal)
+        updateUI()
     }
-
-
+    
+    func updateUI() {
+        storyLabel.text = stories[currentStoryPath].title
+        choice1Button.setTitle(stories[currentStoryPath].choice1, for: .normal)
+        choice2Button.setTitle(stories[currentStoryPath].choice2, for: .normal)
+    }
 }
 
