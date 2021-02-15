@@ -37,9 +37,9 @@ struct StoryBrain {
         let currentStory = stories[currentStoryPath]
         
         if userChoice == currentStory.choice1 {
-            currentStoryPath = 1
+            currentStoryPath = currentStory.choice1Destination
         } else if userChoice == currentStory.choice2 {
-            currentStoryPath = 2
+            currentStoryPath = currentStory.choice2Destination
         }
     }
 }
